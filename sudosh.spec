@@ -12,12 +12,12 @@ Summary: Logged root shell that can be used for auditing
 
 Group: System/SDL-custom
 License: OSL
-URL: http://sourceforge.net/projects/sudosh2/
-Source: http://sudosh2.sourceforge.net/sudosh2-%{version}.tbz2
+URL: https://github.com/kovacs-andras/sudosh2/
+Source: https://github.com/kovacs-andras/sudosh2/archive/%{version}.zip
 
-Packager: John Barton <jbarton@technicalworks.net>
+Packager: Andras Kovacs <andras0602@hotmail.com>
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-# BuildArch: i386
+BuildArch: x86_64
 Requires: sudo
 Provides: %{origname} = %{version}-%{release}, %{name} = %{version}-%{release}
 
