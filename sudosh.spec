@@ -37,14 +37,19 @@ actual session output.
 logdir                  = /var/log/sudosh
 default shell           = /bin/bash
 delimiter               = -
-syslog.priority         = LOG_NOTICE
-syslog.facility         = LOG_DAEMON
+#syslog.priority         = LOG_NOTICE
+syslog.priority         = LOG_INFO
+#syslog.facility         = LOG_DAEMON
+syslog.facility         = LOG_LOCAL2
+clearenvironment        = yes
 
 # Allow Sudosh to execute -c arguements?  If so, what?
 -c arg allow = scp
 -c arg allow = sftp
 -c arg allow = /usr/libexec/openssh/sftp-server
-# -c arg allow = rsync
+-c arg allow = rsync
+-c arg allow = screen
+-c arg allow = tmux
 EOF
 
 %build
