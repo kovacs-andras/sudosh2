@@ -6,4 +6,4 @@ echo '%_topdir %(echo $HOME)/rpmbuild' > ~/.rpmmacros
 wget -P ~/rpmbuild/SOURCES/ https://github.com/kovacs-andras/sudosh2/archive/1.0.7.zip
 unzip -j ~/rpmbuild/SOURCES/1.0.7.zip sudosh2-1.0.7/sudosh.spec -d ~/rpmbuild/SPECS/
 
-rpmbuild -ba /root/rpmbuild/SPECS/sudosh.spec
+rpmbuild -ba /root/rpmbuild/SPECS/sudosh.spec -D "_exec_prefix /usr/local"
