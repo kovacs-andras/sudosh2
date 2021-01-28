@@ -28,7 +28,7 @@ https://go.sap.corp/sudosh2
 https://go.sap.corp/sudosh2-troubleshoot
 
 %prep
-%setup -q -n %{origname}-%{version}
+%setup -q -n %{origname}-%{version}-%{release}
 
 %{__cat} <<EOF >sudosh.conf.tmp
 # Sudosh Configuration File
