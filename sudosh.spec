@@ -3,7 +3,7 @@
 %define origname sudosh2
 %define name sudosh2
 %define version 1.0.7
-%define release 1.el5
+%define release 3.el7
 
 Name: %{name}
 Version: %{version}
@@ -12,22 +12,20 @@ Summary: Logged root shell that can be used for auditing
 
 Group: System/SDL-custom
 License: OSL
-URL: http://sourceforge.net/projects/sudosh2/
-Source: http://sudosh2.sourceforge.net/sudosh2-%{version}.tbz2
+URL: https://github.com/kovacs-andras/sudosh2/
+Source: https://github.com/kovacs-andras/sudosh2/archive/%{version}-%{release}.zip
 
-Packager: John Barton <jbarton@technicalworks.net>
+Packager: Andras Kovacs <andras0602@hotmail.com>
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-# BuildArch: i386
+BuildArch: x86_64
 Requires: sudo
 Provides: %{origname} = %{version}-%{release}, %{name} = %{version}-%{release}
 
 %description
-sudosh2 works directly with sudo to provide a fully functional shell that
-users may use to obtain full root access. Unlike providing a team of system
-administrators full root access through sudo, it guarantees that detailed
-logs are kept. It uses the script command in conjunction with a secure FIFO
-and comes with a utility to view sessions and drill down deeper and see the
-actual session output. 
+sudosh2 is the default login shell for AD-based users.
+See more here:
+https://go.sap.corp/sudosh2
+https://go.sap.corp/sudosh2-troubleshoot
 
 %prep
 %setup -q -n %{origname}-%{version}
@@ -37,14 +35,17 @@ actual session output.
 logdir                  = /var/log/sudosh
 default shell           = /bin/bash
 delimiter               = -
-syslog.priority         = LOG_NOTICE
-syslog.facility         = LOG_DAEMON
+syslog.priority         = LOG_INFO
+syslog.facility         = LOG_LOCAL2
+clearenvironment        = yes
 
 # Allow Sudosh to execute -c arguements?  If so, what?
 -c arg allow = scp
 -c arg allow = sftp
 -c arg allow = /usr/libexec/openssh/sftp-server
-# -c arg allow = rsync
+-c arg allow = rsync
+-c arg allow = screen
+-c arg allow = tmux
 EOF
 
 %build
@@ -74,6 +75,10 @@ install -m 0744 sudosh.conf.tmp %{buildroot}/etc/sudosh.conf
 %dir %attr(0733 root root) /var/log/sudosh
 
 %changelog
+* Thu Jan 28 2021 Andras Kovacs <andras0602@hotmail.com> - 1.0.7-3
+- Update for version 1.0.7
+- Custom HXM sudosh.conf
+- Description with URLs
 * Tue Jul 16 2019 - 1.0.7
 - Fixed ompilation errors for newer gcc
 - Version bumped to 1.0.7
